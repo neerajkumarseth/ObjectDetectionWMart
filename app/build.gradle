@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.learning.image.detection"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildFeatures {
+        viewBinding true
+        mlModelBinding true
+    }
+
+    androidResources {
+        noCompress 'tflite'
+    }
+    compileOptions {
+        sourceCompatibility rootProject.ext.java_version
+        targetCompatibility rootProject.ext.java_version
+    }
+
+    kotlinOptions {
+        jvmTarget = rootProject.ext.java_version
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+
+    // MLKit
+    def mlkit_version = "16.2.4"
+    implementation "com.google.mlkit:object-detection:$mlkit_version"
+
+    // TensorFlow Support
+    def tensor_flow_version = "0.3.1"
+    implementation "org.tensorflow:tensorflow-lite-task-vision:$tensor_flow_version"
+    implementation "org.tensorflow:tensorflow-lite-gpu-delegate-plugin:$tensor_flow_version"
+    implementation "org.tensorflow:tensorflow-lite-support:$tensor_flow_version"
+    implementation "org.tensorflow:tensorflow-lite-metadata:$tensor_flow_version"
+    implementation "org.tensorflow:tensorflow-lite-gpu:2.9.0"
+
+
+    // Navigation
+    def nav_version = "2.4.2"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // CameraX
+    def camerax_version = '1.1.0-beta03'
+    implementation "androidx.camera:camera-core:$camerax_version"
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+    implementation "androidx.camera:camera-view:$camerax_version"
+    implementation "androidx.camera:camera-camera2:$camerax_version"
+
+    // Kotlin lang
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+
+    // App compat and UI things
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
+    implementation 'com.google.mlkit:object-detection-custom:17.0.0'
+
+}

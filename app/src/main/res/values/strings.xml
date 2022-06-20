@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ObjectDetectionWG</string>
+    <string name="permission_deny">Permission Denied, Exit!!.</string>
+    <string name="detecting">Detecting..</string>
+</resources>
